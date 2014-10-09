@@ -24,17 +24,17 @@ class QueryEngine extends BaseEngine {
     /**
      * @var Collection the returning collection
      */
-    private $resultCollection;
+    protected $resultCollection;
 
     /**
      * @var Collection the resulting collection
      */
-    private $collection = null;
+    protected $collection = null;
 
     /**
      * @var array Different options
      */
-    private $options = array(
+    protected $options = array(
         'searchOperator'    =>  'LIKE',
         'searchWithAlias'   =>  false,
         'orderOrder'        =>  null,
@@ -119,7 +119,7 @@ class QueryEngine extends BaseEngine {
      * @param $builder
      * @return Collection
      */
-    private function getCollection($builder)
+    protected function getCollection($builder)
     {
         if($this->collection == null)
         {
@@ -140,7 +140,7 @@ class QueryEngine extends BaseEngine {
         return $this->collection;
     }
 
-    private function doInternalSearch($builder, $columns)
+    protected function doInternalSearch($builder, $columns)
     {
         if (!empty($this->search)) {
             $this->buildSearchQuery($builder, $columns);
@@ -152,7 +152,7 @@ class QueryEngine extends BaseEngine {
 
         return $builder;
     }
-    private function buildSearchQuery($builder, $columns)
+    protected function buildSearchQuery($builder, $columns)
     {
         $like = $this->options['searchOperator'];
         $search = $this->search;
@@ -173,14 +173,14 @@ class QueryEngine extends BaseEngine {
         return $builder;
     }
 
-    private function buildSingleColumnSearches($builder)
+    protected function buildSingleColumnSearches($builder)
     {
         foreach ($this->columnSearches as $columnName => $searchValue) {
             $builder->where($columnName, $this->options['searchOperator'], '%' . $searchValue . '%');
         }
     }
 
-    private function compile($builder, $columns)
+    protected function compile($builder, $columns)
     {
         $this->resultCollection = $this->getCollection($builder);
 
@@ -214,7 +214,7 @@ class QueryEngine extends BaseEngine {
         return $this->resultCollection;
     }
 
-    private function doInternalOrder($builder, $columns)
+    protected function doInternalOrder($builder, $columns)
     {
         if(!is_null($this->orderColumn))
         {

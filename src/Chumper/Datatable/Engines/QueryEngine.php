@@ -100,14 +100,14 @@ class QueryEngine extends BaseEngine {
         $builder = $this->doInternalSearch($builder, $searchColumns);
         $countBuilder = $this->doInternalSearch($countBuilder, $searchColumns);
 
-        if($this->options['searchWithAlias'])
-        {
-            $this->options['counter'] = count($countBuilder->get());
-        }
-        else
-        {
-            $this->options['counter'] = $countBuilder->count();
-        }
+//        if($this->options['searchWithAlias'])
+//        {
+//            $this->options['counter'] = count($countBuilder->get());
+//        }
+//        else
+//        {
+//            $this->options['counter'] = $countBuilder->count();
+//        }
 
         $builder = $this->doInternalOrder($builder, $columns);
         $collection = $this->compile($builder, $columns);
